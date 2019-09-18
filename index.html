@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<script src="javascript.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<noscript>Sorry, your browser does not support JavaScript, so the page functions won't work!</noscript>
+</head>
+
+<body>
+	
+	<div class="aside">
+		<br>
+	</div>
+	
+<!-- Character sheet starts here -->
+	<div class="flex-container">
+	<button onClick="toggleVisibility('edit');">Edit</button>
+	<form>
+	<!-- Table containing basic character details:
+		Name
+		Player Name
+		Experience
+		Ancestry and Heritage
+		Background
+		Class
+		Size
+		Alignment
+		Traits
+		Level
+		Hero Points
+		Deity
+	-->
+		<table id="character-details">
+			<th colspan="4"><h1>Character Details</h1></th>
+			<tr>
+				<td colspan="2" class="field">Name: <input type="textarea" name="character-name" id="character-name" value=""></td>
+				<td class="field">Player Name: <input type="number" name="player-name" id="player-name" value=""></td>
+				<td class="field">Level: <input type="number" name="character-level" id="character-level" min="1" step="1" value="1" size="2" onchange="updateLevel()"></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="field">Ancestry: <input type="text" name="character-race" id="character-race" value=""></td>
+				<td class="field">Background: <input type="textarea" name="character-background" id="character-background" value=""></td>
+				<td class="field">Hero Points: <input type="number" name="character-hero-points" id="character-hero-points" value="" size="2"></td>
+			</tr>
+			<tr>
+				<td class="field">Class: <input type="text" name="character-class" id="character-class" value=""></td>
+				<td class="field">Alignment: <input type="number" name="character-alignment" id="character-alignment" value="" size="5"></td>
+				<td colspan="2" class="field">Traits: <input type="number" name="character-traits" id="character-traits" value=""></td>
+			</tr>
+			<tr>
+				<td class="field">Deity: <input type="text" name="character-deity" id="character-deity" value=""></td>
+				<td class="field">Experience:<br><input type="text" name="character-exp" id="character-exp" value="" size="10">/<input type="text" name="character-exp-max" id="character-exp-max" value="" size="10"></td>
+				<td class="field">Default Size: 
+					<select name="default-size" id="default-size">
+						<option value="tiny">Tiny</option>
+						<option value="small">Small</option>
+						<option value="medium" selected="selected">Medium</option>
+						<option value="large">Large</option>
+					</select>
+				</td>
+				<td class="field">Current Size: 
+					<select name="current-size" id="current-size">
+						<option value="tiny">Tiny</option>
+						<option value="small">Small</option>
+						<option value="medium" selected="selected">Medium</option>
+						<option value="large">Large</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="field">Description:<br><input type="textarea" name="description" id="description" value=""></td>
+			</tr>
+		</table>
+
+	<!-- Table containing ability scores -->
+		<table id="ability-scores">
+			<th colspan="5"><h1>Ability Scores</h1></th>
+			<tr>
+				<td>Ability</td>
+				<td class="strong">Total</td>
+				<td>Mod</td>
+				<td class="edit">Base</td>
+				<td>Bonus</td>
+			</tr>
+			<tr id="str">
+				<td>Strength</td>
+				<td><input type="number" name="str-total" id="str-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="str-mod" id="str-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="str-base" id="str-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('str');"></td>
+				<td><input type="number" name="str-bonus" id="str-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('str');"></td>
+			</tr>
+			<tr id="dex">
+				<td>Dexterity</td>
+				<td><input type="number" name="dex-total" id="dex-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="dex-mod" id="dex-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="dex-base" id="dex-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('dex');"></td>
+				<td><input type="number" name="dex-bonus" id="dex-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('dex');"></td>
+			</tr>
+			<tr id="con">
+				<td>Constitution</td>
+				<td><input type="number" name="con-total" id="con-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="con-mod" id="con-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="con-base" id="con-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('con');"></td>
+				<td><input type="number" name="con-bonus" id="con-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('con');"></td>
+			</tr>
+			<tr id="int">
+				<td>Intelligence</td>
+				<td><input type="number" name="int-total" id="int-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="int-mod" id="int-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="int-base" id="int-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('int');"></td>
+				<td><input type="number" name="int-bonus" id="int-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('int');"></td>
+			</tr>
+			<tr id="wis">
+				<td>Wisdom</td>
+				<td><input type="number" name="wis-total" id="wis-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="wis-mod" id="wis-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="wis-base" id="wis-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('wis');"></td>
+				<td><input type="number" name="wis-bonus" id="wis-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('wis');"></td>
+			</tr>
+			<tr id="cha">
+				<td>Charisma</td>
+				<td><input type="number" name="cha-total" id="cha-total" value="10" size="2" disabled></td>
+				<td><input type="number" name="cha-mod" id="cha-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="cha-base" id="cha-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('cha');"></td>
+				<td><input type="number" name="cha-bonus" id="cha-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('cha');"></td>
+			</tr>
+		</table>
+		
+		<table id="class" class="skill">
+			<th colspan="10"><h1>Class DC</h1></th>
+			<tr>
+				<td class="strong">Total</td>
+				<td class="edit">Base</td>
+				<td>Ability</td>
+				<td>Ability Mod</td>
+				<td>Prof</td>
+				<td class="edit">Prof Value</td>
+				<td>Item</td>
+				<td class="hidden">Armor Penalty</td>
+			</tr>
+			<tr>
+				<td><input type="number" name="class-total" id="class-total" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="class-base" id="class-base" value="10" size="2" disabled></td>
+				<td>
+					<select name="class-ability" id="class-ability" onchange="updateSection('class');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="class-ability-mod" id="class-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="class-prof" id="class-prof" onchange="updateSection('class');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="class-prof-value" id="class-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="class-item" id="class-item" min="0" step="1" value="0" size="2" onchange="updateSection('class');"></td>
+				<td class="hidden"><input type="number" name="class-armor-penalty" id="class-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('class');" disabled></td>
+			</tr>
+		</table>
+		
+		<table id="hit-points">
+			<th colspan="10"><h1>Hit Points</h1></th>
+			<tr>
+				<td>Current</td>
+				<td class="strong">Max</td>
+				<td>Temporary</td>
+				<td class="edit">Ancestry HP</td>
+				<td class="edit">Class HP/lvl</td>
+				<td class="edit">HP Ability</td>
+			</tr>
+			<tr>
+				<td><input type="number" name="hp-current" id="hp-current" min="0" step="1" value="0" size="2"></td>
+				<td><input type="number" name="hp-max" id="hp-max" value="0" size="2" disabled></td>
+				<td><input type="number" name="hp-temp" id="hp-temp" min="0" step="1" value="0" size="2"></td>
+				<td class="edit"><input type="number" name="hp-ancestry" id="hp-ancestry" min="0" step="1" value="0" size="2" onchange="updateHP();"></td>
+				<td class="edit"><input type="number" name="hp-increment" id="hp-increment" min="0" step="1" value="0" size="2" onchange="updateHP();"></td>
+				<td class="edit">
+					<select name="hp-ability" id="hp-ability" onchange="updateHP();">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con" selected="selected">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		
+		<table id="armor-class">
+			<th colspan="10"><h1>Armor Class</h1></th>
+			<tr>
+				<td class="strong">Total</td>
+				<td class="edit">Base</td>
+				<td>Ability</td>
+				<td>Ability Mod</td>
+				<td class="edit">Cap</td>
+				<td>Prof</td>
+				<td class="edit">Prof Value</td>
+				<td>Item</td>
+			</tr>
+			<tr>
+				<td><input type="number" name="ac-total" id="ac-total" value="0" size="2" disabled></td>
+				<td class="edit"><input type="number" name="ac-base" id="ac-base" value="10" size="2" disabled></td>
+				<td>
+					<select name="ac-ability" id="ac-ability" onchange="updateAC();">
+						<option value="str">Strength</option>
+						<option value="dex" selected="selected">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="ac-ability-mod" id="ac-ability-mod" value="0" size="2" disabled></td>
+				<td class="edit"><input type="string" name="ac-cap" id="ac-cap" min="0" step="1" value="-" size="2" onchange="updateAC();"></td>
+				<td>
+					<select name="ac-prof" id="ac-prof" onchange="updateAC();">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="ac-prof-value" id="ac-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="ac-item" id="ac-item" min="0" step="1" value="0" size="2" onchange="updateAC();"></td>
+			</tr>
+			<tr id="shield-row">
+				<td>Shield AC</td>
+				<td><input type="number" name="ac-shield" id="ac-shield" min="0" step="1" value="0" size="2" onchange="updateAC();"></td>
+				<td>Shield Hardness</td>
+				<td><input type="number" name="shield-hardness" id="shield-hardness" min="0" step="1" value="0" size="2"></td>
+				<td>Shield Max HP</td>
+				<td><input type="number" name="shield-hp-max" id="shield-hp-max" min="0" step="1" value="0" size="2"></td>
+				<td>Shield Current HP</td>
+				<td><input type="number" name="shield-hp-current" id="shield-hp-current" min="0" step="1" value="0" size="2"></td>
+			</tr>
+		</table>
+		
+		<table id="saves">
+			<th colspan="10"><h1>Saving Throws</h1></th>
+			<tr>
+				<td>
+					<table id="fort" class="skill">
+						<th colspan="10"><h1>Fortitude</h1></th>
+						<tr>
+							<td class="strong">Total</td>
+							<td class="edit">Ability</td>
+							<td>Ability Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="fort-total" id="fort-total" value="0" size="2" disabled></td>
+							<td class="edit">
+								<select name="fort-ability" id="fort-ability" onchange="updateSection('fort');">
+									<option value="str">Strength</option>
+									<option value="dex">Dexterity</option>
+									<option value="con" selected="selected">Constitution</option>
+									<option value="int">Intelligence</option>
+									<option value="wis">Wisdom</option>
+									<option value="cha">Charisma</option>
+								</select>
+							</td>
+							<td><input type="number" name="fort-ability-mod" id="fort-ability-mod" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="fort-base" id="fort-base" value="0" size="2" disabled></td>
+						</tr>
+						<tr>
+							<td>Item</td>
+							<td>Proficiency</td>
+							<td class="edit">Prof Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="fort-item" id="fort-item" min="0" step="1" value="0" size="2" onchange="updateSection('fort');"></td>
+							<td>
+								<select name="fort-prof" id="fort-prof" onchange="updateSection('fort');">
+									<option value="0" selected="selected">Untrained</option>
+									<option value="2">Trained</option>
+									<option value="4">Expert</option>
+									<option value="6">Master</option>
+									<option value="8">Legendary</option>
+								</select>
+							</td>
+							<td class="edit"><input type="number" name="fort-prof-value" id="fort-prof-value" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="fort-armor-penalty" id="fort-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table id="ref" class="skill">
+						<th colspan="10"><h1>Reflex</h1></th>
+						<tr>
+							<td class="strong">Total</td>
+							<td class="edit">Ability</td>
+							<td>Ability Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="ref-total" id="ref-total" value="0" size="2" disabled></td>
+							<td class="edit">
+								<select name="ref-ability" id="ref-ability" onchange="updateSection('ref');">
+									<option value="str">Strength</option>
+									<option value="dex" selected="selected">Dexterity</option>
+									<option value="con">Constitution</option>
+									<option value="int">Intelligence</option>
+									<option value="wis">Wisdom</option>
+									<option value="cha">Charisma</option>
+								</select>
+							</td>
+							<td><input type="number" name="ref-ability-mod" id="ref-ability-mod" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="ref-base" id="ref-base" value="0" size="2" disabled></td>
+						</tr>
+						<tr>
+							<td>Item</td>
+							<td>Proficiency</td>
+							<td class="edit">Prof Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="ref-item" id="ref-item" min="0" step="1" value="0" size="2" onchange="updateSection('ref');"></td>
+							<td>
+								<select name="ref-prof" id="ref-prof" onchange="updateSection('ref');">
+									<option value="0" selected="selected">Untrained</option>
+									<option value="2">Trained</option>
+									<option value="4">Expert</option>
+									<option value="6">Master</option>
+									<option value="8">Legendary</option>
+								</select>
+							</td>
+							<td class="edit"><input type="number" name="ref-prof-value" id="ref-prof-value" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="ref-armor-penalty" id="ref-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table id="will" class="skill">
+						<th colspan="10"><h1>Will</h1></th>
+						<tr>
+							<td class="strong">Total</td>
+							<td class="edit">Ability</td>
+							<td>Ability Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="will-total" id="will-total" value="0" size="2" disabled></td>
+							<td class="edit">
+								<select name="will-ability" id="will-ability" onchange="updateSection('will');">
+									<option value="str">Strength</option>
+									<option value="dex">Dexterity</option>
+									<option value="con">Constitution</option>
+									<option value="int">Intelligence</option>
+									<option value="wis" selected="selected">Wisdom</option>
+									<option value="cha">Charisma</option>
+								</select>
+							</td>
+							<td><input type="number" name="will-ability-mod" id="will-ability-mod" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="will-base" id="will-base" value="0" size="2" disabled></td>
+						</tr>
+						<tr>
+							<td>Item</td>
+							<td>Proficiency</td>
+							<td class="edit">Prof Mod</td>
+						</tr>
+						<tr>
+							<td><input type="number" name="will-item" id="will-item" min="0" step="1" value="0" size="2" onchange="updateSection('will');"></td>
+							<td>
+								<select name="will-prof" id="will-prof" onchange="updateSection('will');">
+									<option value="0" selected="selected">Untrained</option>
+									<option value="2">Trained</option>
+									<option value="4">Expert</option>
+									<option value="6">Master</option>
+									<option value="8">Legendary</option>
+								</select>
+							</td>
+							<td class="edit"><input type="number" name="will-prof-value" id="will-prof-value" value="0" size="2" disabled></td>
+							<td class="hidden"><input type="number" name="will-armor-penalty" id="will-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+			
+		<table id="perception" class="skill">
+			<th colspan="10"><h1>Perception</h1></th>
+			<tr>
+				<td class="strong">Total</td>
+				<td class="hidden">Base</td>
+				<td>Ability</td>
+				<td>Ability Mod</td>
+				<td>Prof</td>
+				<td class="edit">Prof Value</td>
+				<td>Item</td>
+				<td class="hidden">Armor Penalty</td>
+			</tr>
+			<tr>
+				<td><input type="number" name="perception-total" id="perception-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="perception-base" id="perception-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="perception-ability" id="perception-ability" onchange="updateSection('perception');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="perception-ability-mod" id="perception-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="perception-prof" id="perception-prof" onchange="updateSection('perception');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="perception-prof-value" id="perception-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="perception-item" id="perception-item" min="0" step="1" value="0" size="2" onchange="updateSection('perception');"></td>
+				<td class="hidden"><input type="number" name="perception-armor-penalty" id="perception-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+		</table>
+		
+		<table id="speed">
+			<th colspan="5"><h1>Speed</h1></th>
+			<tr>
+				<td class="strong">Base</td>
+				<td class="strong">Notes</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="speed-base" id="speed-base" value=""></td>
+				<td><input type="text" name="speed-notes" id="speed-notes" value=""></td>
+			</tr>
+		</table>
+		
+		<table id="attacks">
+			<!-- TODO: Attacks table -->
+			
+		</table>
+		
+		<table id="skills">
+			<th colspan="10"><h1>Skills</h1></th>
+			<tr>
+				<td>Skill</td>
+				<td class="strong">Total</td>
+				<td>Ability</td>
+				<td>Ability Mod</td>
+				<td>Prof</td>
+				<td class="edit">Prof Value</td>
+				<td>Item</td>
+				<td>Armor Penalty</td>
+			</tr>
+			<tr id="acrobatics" class="skill">
+				<td class="strong">Acrobatics</td>
+				<td><input type="number" name="acrobatics-total" id="acrobatics-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="acrobatics-base" id="acrobatics-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="acrobatics-ability" id="acrobatics-ability" onchange="updateSection('acrobatics');">
+						<option value="str">Strength</option>
+						<option value="dex" selected="selected">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="acrobatics-ability-mod" id="acrobatics-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="acrobatics-prof" id="acrobatics-prof" onchange="updateSection('acrobatics');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="acrobatics-prof-value" id="acrobatics-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="acrobatics-item" id="acrobatics-item" min="0" step="1" value="0" size="2" onchange="updateSection('acrobatics');"></td>
+				<td><input type="number" name="acrobatics-armor-penalty" id="acrobatics-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('acrobatics');"></td>
+			</tr>
+			<tr id="arcana" class="skill">
+				<td class="strong">Arcana</td>
+				<td><input type="number" name="arcana-total" id="arcana-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="arcana-base" id="arcana-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="arcana-ability" id="arcana-ability" onchange="updateSection('arcana');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="arcana-ability-mod" id="arcana-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="arcana-prof" id="arcana-prof" onchange="updateSection('arcana');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="arcana-prof-value" id="arcana-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="arcana-item" id="arcana-item" min="0" step="1" value="0" size="2" onchange="updateSection('arcana');"></td>
+				<td class="hidden"><input type="number" name="arcana-armor-penalty" id="arcana-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="athletics" class="skill">
+				<td class="strong">Athletics</td>
+				<td><input type="number" name="athletics-total" id="athletics-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="athletics-base" id="athletics-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="athletics-ability" id="athletics-ability" onchange="updateSection('athletics');">
+						<option value="str" selected="selected">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="athletics-ability-mod" id="athletics-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="athletics-prof" id="athletics-prof" onchange="updateSection('athletics');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="athletics-prof-value" id="athletics-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="athletics-item" id="athletics-item" min="0" step="1" value="0" size="2" onchange="updateSection('athletics');"></td>
+				<td><input type="number" name="athletics-armor-penalty" id="athletics-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('athletics');"></td>
+			</tr>
+			<tr id="crafting" class="skill">
+				<td class="strong">Crafting</td>
+				<td><input type="number" name="crafting-total" id="crafting-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="crafting-base" id="crafting-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="crafting-ability" id="crafting-ability" onchange="updateSection('crafting');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="crafting-ability-mod" id="crafting-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="crafting-prof" id="crafting-prof" onchange="updateSection('crafting');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="crafting-prof-value" id="crafting-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="crafting-item" id="crafting-item" min="0" step="1" value="0" size="2" onchange="updateSection('crafting');"></td>
+				<td class="hidden"><input type="number" name="crafting-armor-penalty" id="crafting-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="deception" class="skill">
+				<td class="strong">Deception</td>
+				<td><input type="number" name="deception-total" id="deception-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="deception-base" id="deception-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="deception-ability" id="deception-ability" onchange="updateSection('deception');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha" selected="selected">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="deception-ability-mod" id="deception-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="deception-prof" id="deception-prof" onchange="updateSection('deception');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="deception-prof-value" id="deception-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="deception-item" id="deception-item" min="0" step="1" value="0" size="2" onchange="updateSection('deception');"></td>
+				<td class="hidden"><input type="number" name="deception-armor-penalty" id="deception-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="diplomacy" class="skill">
+				<td class="strong">Diplomacy</td>
+				<td><input type="number" name="diplomacy-total" id="diplomacy-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="diplomacy-base" id="diplomacy-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="diplomacy-ability" id="diplomacy-ability" onchange="updateSection('diplomacy');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha" selected="selected">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="diplomacy-ability-mod" id="diplomacy-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="diplomacy-prof" id="diplomacy-prof" onchange="updateSection('diplomacy');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="diplomacy-prof-value" id="diplomacy-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="diplomacy-item" id="diplomacy-item" min="0" step="1" value="0" size="2" onchange="updateSection('diplomacy');"></td>
+				<td class="hidden"><input type="number" name="diplomacy-armor-penalty" id="diplomacy-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="intimidation" class="skill">
+				<td class="strong">Intimidation</td>
+				<td><input type="number" name="intimidation-total" id="intimidation-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="intimidation-base" id="intimidation-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="intimidation-ability" id="intimidation-ability" onchange="updateSection('intimidation');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha" selected="selected">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="intimidation-ability-mod" id="intimidation-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="intimidation-prof" id="intimidation-prof" onchange="updateSection('intimidation');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="intimidation-prof-value" id="intimidation-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="intimidation-item" id="intimidation-item" min="0" step="1" value="0" size="2" onchange="updateSection('intimidation');"></td>
+				<td class="hidden"><input type="number" name="intimidation-armor-penalty" id="intimidation-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="lore1" class="skill">
+				<td class="strong"><input type="text" name="lore1-name" id="lore1-name" class="inline" value="" size="10"> Lore</td>
+				<td><input type="number" name="lore1-total" id="lore1-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="lore1-base" id="lore1-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="lore1-ability" id="lore1-ability" onchange="updateSection('lore1');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="lore1-ability-mod" id="lore1-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="lore1-prof" id="lore1-prof" onchange="updateSection('lore1');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="lore1-prof-value" id="lore1-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="lore1-item" id="lore1-item" min="0" step="1" value="0" size="2" onchange="updateSection('lore1');"></td>
+				<td class="hidden"><input type="number" name="lore1-armor-penalty" id="lore1-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="lore2" class="skill">
+				<td class="strong"><input type="text" name="lore2-name" id="lore2-name" class="inline" value="" size="10"> Lore</td>
+				<td><input type="number" name="lore2-total" id="lore2-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="lore2-base" id="lore2-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="lore2-ability" id="lore2-ability" onchange="updateSection('lore2');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="lore2-ability-mod" id="lore2-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="lore2-prof" id="lore2-prof" onchange="updateSection('lore2');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="lore2-prof-value" id="lore2-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="lore2-item" id="lore2-item" min="0" step="1" value="0" size="2" onchange="updateSection('lore2');"></td>
+				<td class="hidden"><input type="number" name="lore2-armor-penalty" id="lore2-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="medicine" class="skill">
+				<td class="strong">Medicine</td>
+				<td><input type="number" name="medicine-total" id="medicine-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="medicine-base" id="medicine-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="medicine-ability" id="medicine-ability" onchange="updateSection('medicine');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="medicine-ability-mod" id="medicine-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="medicine-prof" id="medicine-prof" onchange="updateSection('medicine');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="medicine-prof-value" id="medicine-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="medicine-item" id="medicine-item" min="0" step="1" value="0" size="2" onchange="updateSection('medicine');"></td>
+				<td class="hidden"><input type="number" name="medicine-armor-penalty" id="medicine-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="nature" class="skill">
+				<td class="strong">Nature</td>
+				<td><input type="number" name="nature-total" id="nature-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="nature-base" id="nature-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="nature-ability" id="nature-ability" onchange="updateSection('nature');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="nature-ability-mod" id="nature-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="nature-prof" id="nature-prof" onchange="updateSection('nature');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="nature-prof-value" id="nature-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="nature-item" id="nature-item" min="0" step="1" value="0" size="2" onchange="updateSection('nature');"></td>
+				<td class="hidden"><input type="number" name="nature-armor-penalty" id="nature-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="occultism" class="skill">
+				<td class="strong">Occultism</td>
+				<td><input type="number" name="occultism-total" id="occultism-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="occultism-base" id="occultism-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="occultism-ability" id="occultism-ability" onchange="updateSection('occultism');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="occultism-ability-mod" id="occultism-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="occultism-prof" id="occultism-prof" onchange="updateSection('occultism');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="occultism-prof-value" id="occultism-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="occultism-item" id="occultism-item" min="0" step="1" value="0" size="2" onchange="updateSection('occultism');"></td>
+				<td class="hidden"><input type="number" name="occultism-armor-penalty" id="occultism-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="performance" class="skill">
+				<td class="strong">Performance</td>
+				<td><input type="number" name="performance-total" id="performance-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="performance-base" id="performance-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="performance-ability" id="performance-ability" onchange="updateSection('performance');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha" selected="selected">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="performance-ability-mod" id="performance-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="performance-prof" id="performance-prof" onchange="updateSection('performance');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="performance-prof-value" id="performance-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="performance-item" id="performance-item" min="0" step="1" value="0" size="2" onchange="updateSection('performance');"></td>
+				<td class="hidden"><input type="number" name="performance-armor-penalty" id="performance-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="religion" class="skill">
+				<td class="strong">Religion</td>
+				<td><input type="number" name="religion-total" id="religion-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="religion-base" id="religion-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="religion-ability" id="religion-ability" onchange="updateSection('religion');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="religion-ability-mod" id="religion-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="religion-prof" id="religion-prof" onchange="updateSection('religion');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="religion-prof-value" id="religion-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="religion-item" id="religion-item" min="0" step="1" value="0" size="2" onchange="updateSection('religion');"></td>
+				<td class="hidden"><input type="number" name="religion-armor-penalty" id="religion-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="society" class="skill">
+				<td class="strong">Society</td>
+				<td><input type="number" name="society-total" id="society-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="society-base" id="society-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="society-ability" id="society-ability" onchange="updateSection('society');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int" selected="selected">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="society-ability-mod" id="society-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="society-prof" id="society-prof" onchange="updateSection('society');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="society-prof-value" id="society-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="society-item" id="society-item" min="0" step="1" value="0" size="2" onchange="updateSection('society');"></td>
+				<td class="hidden"><input type="number" name="society-armor-penalty" id="society-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="stealth" class="skill">
+				<td class="strong">Stealth</td>
+				<td><input type="number" name="stealth-total" id="stealth-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="stealth-base" id="stealth-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="stealth-ability" id="stealth-ability" onchange="updateSection('stealth');">
+						<option value="str">Strength</option>
+						<option value="dex" selected="selected">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="stealth-ability-mod" id="stealth-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="stealth-prof" id="stealth-prof" onchange="updateSection('stealth');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="stealth-prof-value" id="stealth-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="stealth-item" id="stealth-item" min="0" step="1" value="0" size="2" onchange="updateSection('stealth');"></td>
+				<td><input type="number" name="stealth-armor-penalty" id="stealth-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('stealth');"></td>
+			</tr>
+			<tr id="survival" class="skill">
+				<td class="strong">Survival</td>
+				<td><input type="number" name="survival-total" id="survival-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="survival-base" id="survival-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="survival-ability" id="survival-ability" onchange="updateSection('survival');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="survival-ability-mod" id="survival-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="survival-prof" id="survival-prof" onchange="updateSection('survival');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="survival-prof-value" id="survival-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="survival-item" id="survival-item" min="0" step="1" value="0" size="2" onchange="updateSection('survival');"></td>
+				<td class="hidden"><input type="number" name="survival-armor-penalty" id="survival-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+			<tr id="thievery" class="skill">
+				<td class="strong">Thievery</td>
+				<td><input type="number" name="thievery-total" id="thievery-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="thievery-base" id="thievery-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="thievery-ability" id="thievery-ability" onchange="updateSection('thievery');">
+						<option value="str">Strength</option>
+						<option value="dex" selected="selected">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="thievery-ability-mod" id="thievery-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="thievery-prof" id="thievery-prof" onchange="updateSection('thievery');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="thievery-prof-value" id="thievery-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="thievery-item" id="thievery-item" min="0" step="1" value="0" size="2" onchange="updateSection('thievery');"></td>
+				<td><input type="number" name="thievery-armor-penalty" id="thievery-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('thievery');"></td>
+			</tr>
+		</table>
+		
+		<button onClick="download();">Download</button>
+
+	</form>
+	</div>
+</body>
+</html>
