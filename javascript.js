@@ -144,7 +144,7 @@ function download() {
 	var fileName = "json.txt";
 	var contentType = "text/plain";
 	
-	alert(content);
+	//DEBUG alert(content);
 	downloadFile(content, fileNme, contentType);
 	
 }
