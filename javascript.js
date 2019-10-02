@@ -144,7 +144,7 @@ function rollFor(stat) {
 	
 	var diceResult = rollDice(1,20)
 	var result = diceResult + statTotal;
-	alert("Rolled: " + result + " (" + diceResult + " + " statTotal + ")");
+	alert("Rolled: " + result + " (" + diceResult + " + " + statTotal + ")");
 	
 	document.getElementById("roll-name").value = statName;
 	document.getElementById("roll-result").value = result;
