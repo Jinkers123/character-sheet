@@ -135,7 +135,6 @@ function updateSkills(ability) {
 function rollFor(stat) {
 	
 	if (['str','dex','con','int','wis','cha'].includes(stat)) {
-		alert("Rolled an ability score");
 		var statTotal = parseInt(document.getElementById(stat + "-mod").value);
 	} else {
 		alert("Rolled a skill");
@@ -143,10 +142,9 @@ function rollFor(stat) {
 	}
 	var statName = document.getElementById(stat + "-button").innerHTML;
 	
-	alert(statTotal + " modifier for: " + statName);
-	
-	var result = rollDice(1,20) + statTotal;
-	alert("Rolled: " + result);
+	var diceResult = rollDice(1,20)
+	var result = diceResult + statTotal;
+	alert("Rolled: " + result + " (" + diceResult + " + " statTotal + ")");
 	
 	document.getElementById("roll-name").value = statName;
 	document.getElementById("roll-result").value = result;
