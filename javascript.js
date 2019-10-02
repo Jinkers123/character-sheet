@@ -134,17 +134,22 @@ function updateSkills(ability) {
 
 function rollFor(stat) {
 	
-	if (['str','dex','con','int','wis','cha'].includes(stat)) {
+	
+	if (["str","dex","con","int","wis","cha"].includes(stat)) {
+		var statName = document.getElementById(stat + "-button").innerHTML;
 		var statTotal = parseInt(document.getElementById(stat + "-mod").value);
+	} else if (stat.includes("lore")) {
+		alert("Rolled a lore skill");
+		var statName = document.getElementById(stat + "-name").value + document.getElementById(stat + "-button").innerHTML;
+		var statTotal = parseInt(document.getElementById(stat + "-total").value);
 	} else {
-		alert("Rolled a skill");
+		var statName = document.getElementById(stat + "-button").innerHTML;
 		var statTotal = parseInt(document.getElementById(stat + "-total").value);
 	}
-	var statName = document.getElementById(stat + "-button").innerHTML;
 	
-	var diceResult = rollDice(1,20)
+	var diceResult = rollDice(1,20);
 	var result = diceResult + statTotal;
-	alert("Rolled: " + result + " (" + diceResult + " + " + statTotal + ")");
+	alert("Rolled " + statName + ": " + result + " (" + diceResult + " + " + statTotal + ")");
 	
 	document.getElementById("roll-name").value = statName;
 	document.getElementById("roll-result").value = result;
