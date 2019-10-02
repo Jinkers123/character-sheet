@@ -134,7 +134,7 @@ function updateSkills(ability) {
 
 function rollFor(stat) {
 	
-	IF ['str','dex','con','int','wis','cha'].includes(stat) {
+	if (['str','dex','con','int','wis','cha'].includes(stat)) {
 		alert("Rolled an ability score");
 		var statTotal = parseInt(document.getElementById(stat + "-mod").value);
 	} else {
