@@ -497,7 +497,7 @@
 				<td><input type="number" name="acrobatics-armor-penalty" id="acrobatics-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('acrobatics');"></td>
 			</tr>
 			<tr id="arcana" class="skill">
-				<td class="strong">Arcana</td>
+				<td class="strong"><button type="button" id="arcana-button" onClick="rollFor('arcana');">Arcana</button></td>
 				<td><input type="number" name="arcana-total" id="arcana-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="arcana-base" id="arcana-base" value="0" size="2" disabled></td>
 				<td>
@@ -525,7 +525,7 @@
 				<td class="hidden"><input type="number" name="arcana-armor-penalty" id="arcana-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="athletics" class="skill">
-				<td class="strong">Athletics</td>
+				<td class="strong"><button type="button" id="athletics-button" onClick="rollFor('athletics');">Athletics</button></td>
 				<td><input type="number" name="athletics-total" id="athletics-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="athletics-base" id="athletics-base" value="0" size="2" disabled></td>
 				<td>
@@ -553,7 +553,7 @@
 				<td><input type="number" name="athletics-armor-penalty" id="athletics-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('athletics');"></td>
 			</tr>
 			<tr id="crafting" class="skill">
-				<td class="strong">Crafting</td>
+				<td class="strong"><button type="button" id="crafting-button" onClick="rollFor('crafting');">Crafting</button></td>
 				<td><input type="number" name="crafting-total" id="crafting-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="crafting-base" id="crafting-base" value="0" size="2" disabled></td>
 				<td>
@@ -581,7 +581,7 @@
 				<td class="hidden"><input type="number" name="crafting-armor-penalty" id="crafting-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="deception" class="skill">
-				<td class="strong">Deception</td>
+				<td class="strong"><button type="button" id="deception-button" onClick="rollFor('deception');">Deception</button></td>
 				<td><input type="number" name="deception-total" id="deception-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="deception-base" id="deception-base" value="0" size="2" disabled></td>
 				<td>
@@ -609,7 +609,7 @@
 				<td class="hidden"><input type="number" name="deception-armor-penalty" id="deception-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="diplomacy" class="skill">
-				<td class="strong">Diplomacy</td>
+				<td class="strong"><button type="button" id="diplomacy-button" onClick="rollFor('diplomacy');">Diplomacy</button></td>
 				<td><input type="number" name="diplomacy-total" id="diplomacy-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="diplomacy-base" id="diplomacy-base" value="0" size="2" disabled></td>
 				<td>
@@ -637,7 +637,7 @@
 				<td class="hidden"><input type="number" name="diplomacy-armor-penalty" id="diplomacy-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="intimidation" class="skill">
-				<td class="strong">Intimidation</td>
+				<td class="strong"><button type="button" id="intimidation-button" onClick="rollFor('intimidation');">Intimidation</button></td>
 				<td><input type="number" name="intimidation-total" id="intimidation-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="intimidation-base" id="intimidation-base" value="0" size="2" disabled></td>
 				<td>
@@ -665,7 +665,7 @@
 				<td class="hidden"><input type="number" name="intimidation-armor-penalty" id="intimidation-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="lore1" class="skill">
-				<td class="strong"><input type="text" name="lore1-name" id="lore1-name" class="inline" value="" size="10"> Lore</td>
+				<td class="strong"><input type="text" name="lore1-name" id="lore1-name" class="inline" value="" size="10"><button type="button" id="lore1-button" onClick="rollFor('lore1');"> Lore</button></td>
 				<td><input type="number" name="lore1-total" id="lore1-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="lore1-base" id="lore1-base" value="0" size="2" disabled></td>
 				<td>
@@ -693,7 +693,7 @@
 				<td class="hidden"><input type="number" name="lore1-armor-penalty" id="lore1-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="lore2" class="skill">
-				<td class="strong"><input type="text" name="lore2-name" id="lore2-name" class="inline" value="" size="10"> Lore</td>
+				<td class="strong"><input type="text" name="lore2-name" id="lore2-name" class="inline" value="" size="10"><button type="button" id="lore2-button" onClick="rollFor('lore2');"> Lore</button></td>
 				<td><input type="number" name="lore2-total" id="lore2-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="lore2-base" id="lore2-base" value="0" size="2" disabled></td>
 				<td>
@@ -721,7 +721,7 @@
 				<td class="hidden"><input type="number" name="lore2-armor-penalty" id="lore2-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="medicine" class="skill">
-				<td class="strong">Medicine</td>
+				<td class="strong"><button type="button" id="medicine-button" onClick="rollFor('medicine');">Medicine</button></td>
 				<td><input type="number" name="medicine-total" id="medicine-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="medicine-base" id="medicine-base" value="0" size="2" disabled></td>
 				<td>
@@ -749,7 +749,7 @@
 				<td class="hidden"><input type="number" name="medicine-armor-penalty" id="medicine-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="nature" class="skill">
-				<td class="strong">Nature</td>
+				<td class="strong"><button type="button" id="nature-button" onClick="rollFor('nature');">Nature</button></td>
 				<td><input type="number" name="nature-total" id="nature-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="nature-base" id="nature-base" value="0" size="2" disabled></td>
 				<td>
@@ -777,7 +777,7 @@
 				<td class="hidden"><input type="number" name="nature-armor-penalty" id="nature-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="occultism" class="skill">
-				<td class="strong">Occultism</td>
+				<td class="strong"><button type="button" id="occultism-button" onClick="rollFor('occultism');">Occultism</button></td>
 				<td><input type="number" name="occultism-total" id="occultism-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="occultism-base" id="occultism-base" value="0" size="2" disabled></td>
 				<td>
@@ -805,7 +805,7 @@
 				<td class="hidden"><input type="number" name="occultism-armor-penalty" id="occultism-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="performance" class="skill">
-				<td class="strong">Performance</td>
+				<td class="strong"><button type="button" id="performance-button" onClick="rollFor('performance');">Performance</button></td>
 				<td><input type="number" name="performance-total" id="performance-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="performance-base" id="performance-base" value="0" size="2" disabled></td>
 				<td>
@@ -833,7 +833,7 @@
 				<td class="hidden"><input type="number" name="performance-armor-penalty" id="performance-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="religion" class="skill">
-				<td class="strong">Religion</td>
+				<td class="strong"><button type="button" id="religion-button" onClick="rollFor('religion');">Religion</button></td>
 				<td><input type="number" name="religion-total" id="religion-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="religion-base" id="religion-base" value="0" size="2" disabled></td>
 				<td>
@@ -861,7 +861,7 @@
 				<td class="hidden"><input type="number" name="religion-armor-penalty" id="religion-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="society" class="skill">
-				<td class="strong">Society</td>
+				<td class="strong"><button type="button" id="society-button" onClick="rollFor('society');">Society</button></td>
 				<td><input type="number" name="society-total" id="society-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="society-base" id="society-base" value="0" size="2" disabled></td>
 				<td>
@@ -889,7 +889,7 @@
 				<td class="hidden"><input type="number" name="society-armor-penalty" id="society-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="stealth" class="skill">
-				<td class="strong">Stealth</td>
+				<td class="strong"><button type="button" id="stealth-button" onClick="rollFor('stealth');">Stealth</button></td>
 				<td><input type="number" name="stealth-total" id="stealth-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="stealth-base" id="stealth-base" value="0" size="2" disabled></td>
 				<td>
@@ -917,7 +917,7 @@
 				<td><input type="number" name="stealth-armor-penalty" id="stealth-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('stealth');"></td>
 			</tr>
 			<tr id="survival" class="skill">
-				<td class="strong">Survival</td>
+				<td class="strong"><button type="button" id="survival-button" onClick="rollFor('survival');">Survival</button></td>
 				<td><input type="number" name="survival-total" id="survival-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="survival-base" id="survival-base" value="0" size="2" disabled></td>
 				<td>
@@ -945,7 +945,7 @@
 				<td class="hidden"><input type="number" name="survival-armor-penalty" id="survival-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
 			</tr>
 			<tr id="thievery" class="skill">
-				<td class="strong">Thievery</td>
+				<td class="strong"><button type="button" id="thievery-button" onClick="rollFor('thievery');">Thievery</button></td>
 				<td><input type="number" name="thievery-total" id="thievery-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="thievery-base" id="thievery-base" value="0" size="2" disabled></td>
 				<td>
