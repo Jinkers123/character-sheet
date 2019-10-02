@@ -96,42 +96,42 @@
 				<td>Bonus</td>
 			</tr>
 			<tr id="str">
-				<td><button type="button" id="str-button" onClick="rollFor('str');">Strength</></td>
+				<td><button type="button" id="str-button" onClick="rollFor('str');">Strength</button></td>
 				<td><input type="number" name="str-total" id="str-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="str-mod" id="str-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="str-base" id="str-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('str');"></td>
 				<td><input type="number" name="str-bonus" id="str-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('str');"></td>
 			</tr>
 			<tr id="dex">
-				<td>Dexterity</td>
+				<td><button type="button" id="dex-button" onClick="rollFor('dex');">Dexterity</button></td>
 				<td><input type="number" name="dex-total" id="dex-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="dex-mod" id="dex-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="dex-base" id="dex-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('dex');"></td>
 				<td><input type="number" name="dex-bonus" id="dex-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('dex');"></td>
 			</tr>
 			<tr id="con">
-				<td>Constitution</td>
+				<td><button type="button" id="con-button" onClick="rollFor('con');">Constitution</button></td>
 				<td><input type="number" name="con-total" id="con-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="con-mod" id="con-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="con-base" id="con-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('con');"></td>
 				<td><input type="number" name="con-bonus" id="con-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('con');"></td>
 			</tr>
 			<tr id="int">
-				<td>Intelligence</td>
+				<td><button type="button" id="int-button" onClick="rollFor('int');">Intelligence</button></td>
 				<td><input type="number" name="int-total" id="int-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="int-mod" id="int-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="int-base" id="int-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('int');"></td>
 				<td><input type="number" name="int-bonus" id="int-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('int');"></td>
 			</tr>
 			<tr id="wis">
-				<td>Wisdom</td>
+				<td><button type="button" id="wis-button" onClick="rollFor('wis');">Wisdom</button></td>
 				<td><input type="number" name="wis-total" id="wis-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="wis-mod" id="wis-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="wis-base" id="wis-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('wis');"></td>
 				<td><input type="number" name="wis-bonus" id="wis-bonus" min="0" max="99" step="1" value="0" size="2" onchange="updateAbilities('wis');"></td>
 			</tr>
 			<tr id="cha">
-				<td>Charisma</td>
+				<td><button type="button" id="cha-button" onClick="rollFor('cha');">Charisma</button></td>
 				<td><input type="number" name="cha-total" id="cha-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="cha-mod" id="cha-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="cha-base" id="cha-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('cha');"></td>
@@ -265,7 +265,7 @@
 			<tr>
 				<td>
 					<table id="fort" class="skill">
-						<th colspan="10"><h1>Fortitude</h1></th>
+						<th colspan="10"><h1><button type="button" id="fort-button" onClick="rollFor('fort');">Fortitude</button></h1></th>
 						<tr>
 							<td class="strong">Total</td>
 							<td class="edit">Ability</td>
@@ -309,7 +309,7 @@
 				</td>
 				<td>
 					<table id="ref" class="skill">
-						<th colspan="10"><h1>Reflex</h1></th>
+						<th colspan="10"><h1><button type="button" id="ref-button" onClick="rollFor('ref');">Reflex</button></h1></th>
 						<tr>
 							<td class="strong">Total</td>
 							<td class="edit">Ability</td>
@@ -353,7 +353,7 @@
 				</td>
 				<td>
 					<table id="will" class="skill">
-						<th colspan="10"><h1>Will</h1></th>
+						<th colspan="10"><h1><button type="button" id="will-button" onClick="rollFor('will');">Will</button></h1></th>
 						<tr>
 							<td class="strong">Total</td>
 							<td class="edit">Ability</td>
@@ -399,7 +399,7 @@
 		</table>
 			
 		<table id="perception" class="skill">
-			<th colspan="10"><h1>Perception</h1></th>
+			<th colspan="10"><h1><button type="button" id="perception-button" onClick="rollFor('perception');">Perception</button></h1></th>
 			<tr>
 				<td class="strong">Total</td>
 				<td class="hidden">Base</td>
@@ -469,7 +469,7 @@
 				<td>Armor Penalty</td>
 			</tr>
 			<tr id="acrobatics" class="skill">
-				<td class="strong">Acrobatics</td>
+				<td class="strong"><button type="button" id="acrobatics-button" onClick="rollFor('acrobatics');">Acrobatics</button></td>
 				<td><input type="number" name="acrobatics-total" id="acrobatics-total" value="0" size="2" disabled></td>
 				<td class="hidden"><input type="number" name="acrobatics-base" id="acrobatics-base" value="0" size="2" disabled></td>
 				<td>
