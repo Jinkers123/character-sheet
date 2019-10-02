@@ -133,7 +133,14 @@ function updateSkills(ability) {
 }
 
 function rollFor(stat) {
-	var statTotal = parseInt(document.getElementById(stat + "-total").value);
+	
+	IF ['str','dex','con','int','wis','cha'].includes(stat) {
+		alert("Rolled an ability score");
+		var statTotal = parseInt(document.getElementById(stat + "-mod").value);
+	} else {
+		alert("Rolled a skill");
+		var statTotal = parseInt(document.getElementById(stat + "-total").value)
+	}
 	var statName = document.getElementById(stat + "-button").innerHTML;
 	
 	alert(statTotal + " modifier for: " + statName);
@@ -141,8 +148,8 @@ function rollFor(stat) {
 	var result = rollDice(1,20) + statTotal;
 	alert("Rolled: " + result);
 	
-	document.getElementById("roll-name") = statName;
-	document.getElementById("roll-result") = result;
+	document.getElementById("roll-name").value = statName;
+	document.getElementById("roll-result").value = result;
 }
 
 function rollDice(min, max) { // min and max included 
