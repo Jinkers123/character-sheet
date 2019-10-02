@@ -139,7 +139,7 @@ function rollFor(stat) {
 		var statTotal = parseInt(document.getElementById(stat + "-mod").value);
 	} else {
 		alert("Rolled a skill");
-		var statTotal = parseInt(document.getElementById(stat + "-total").value)
+		var statTotal = parseInt(document.getElementById(stat + "-total").value);
 	}
 	var statName = document.getElementById(stat + "-button").innerHTML;
 	
