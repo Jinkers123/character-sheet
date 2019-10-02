@@ -5,6 +5,18 @@
 	<script src="javascript.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<noscript>Sorry, your browser does not support JavaScript, so the page functions won't work!</noscript>
+	
+	<button type="button" onClick="toggleVisibility('edit');">Edit</button>
+	<a href="Login-Page.html">Login</a>
+	<table id="roll-area">
+		<th>Last roll:</th>
+		<tr>
+			<input type="text" name="roll-name" id="roll-name" value="" disabled>
+		</tr>
+		<tr>
+			<input type="number" name="roll-result" id="roll-result" value="" disabled>
+		</tr>
+	</table>
 </head>
 
 <body>
@@ -15,18 +27,7 @@
 	
 <!-- Character sheet starts here -->
 	<div class="flex-container">
-	<button type="button" onClick="toggleVisibility('edit');">Edit</button>
-	<a href="Login-Page.html">Login</a>
-		<table id="roll-area">
-			<th>Last roll:</th>
-			<tr>
-				<input type="text" name="roll-name" id="roll-name" value="" disabled>
-			</tr>
-			<tr>
-				<input type="number" name="roll-result" id="roll-result" value="" disabled>
-			</tr>
-		</table>
-	<form>
+		<form>
 	<!-- Table containing basic character details:
 		Name
 		Player Name
