@@ -15,7 +15,7 @@
 	
 <!-- Character sheet starts here -->
 	<div class="flex-container">
-	<button onClick="toggleVisibility('edit');">Edit</button>
+	<button type="button" onClick="toggleVisibility('edit');">Edit</button>
 	<a href="Login-Page.html">Login</a>
 		<table id="roll-area">
 			<tr>
@@ -93,7 +93,7 @@
 				<td>Bonus</td>
 			</tr>
 			<tr id="str">
-				<td><button id="str-button" onClick="rollFor('str');">Strength</button></td>
+				<td><button type="button" id="str-button" onClick="rollFor('str');">Strength</></td>
 				<td><input type="number" name="str-total" id="str-total" value="10" size="2" disabled></td>
 				<td><input type="number" name="str-mod" id="str-mod" value="0" size="2" disabled></td>
 				<td class="edit"><input type="number" name="str-base" id="str-base" min="0" max="99" step="1" value="10" size="2" onchange="updateAbilities('str');"></td>
@@ -971,7 +971,7 @@
 			</tr>
 		</table>
 		
-		<button onClick="download();">Download</button>
+		<button type="button" onClick="download();">Download</button>
 
 	</form>
 	</div>
