@@ -57,8 +57,11 @@ function updateAC() {
 		acAbilityFinal = Math.min(acAbilityMod, parseInt(document.getElementById("ac-cap").value));
 	}
 	
-	//Calculate AC proficiency based on Proficiency bonus + level and populate the abilityProf field
-	var acProf = parseInt(document.getElementById("ac-prof").value) + parseInt(document.getElementById("character-level").value);
+	//Calculate AC proficiency bonus based on Proficiency bonus + level (or zero if untrained)
+	var acProf = 0
+	if (parseInt(document.getElementById("ac-prof").value) > 0) {
+		var acProf = parseInt(document.getElementById("ac-prof").value) + parseInt(document.getElementById("character-level").value);
+	}
 	document.getElementById("ac-prof-value").value = acProf;
 	
 	var acItem = parseInt(document.getElementById("ac-item").value);
@@ -85,7 +88,7 @@ function updateSection(section) {
 	
 	var dcAbilityMod = parseInt(document.getElementById(section + "-ability-mod").value);
 	
-	//Calculate DC proficiency based on Proficiency bonus + level (or zero if untrained)
+	//Calculate DC proficiency bonus based on Proficiency bonus + level (or zero if untrained)
 	var dcProf = 0
 	if (parseInt(document.getElementById(section + "-prof").value) > 0) {
 		dcProf = parseInt(document.getElementById(section + "-prof").value) + parseInt(document.getElementById("character-level").value);
