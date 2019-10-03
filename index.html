@@ -29,15 +29,16 @@
 	<div class="flex-container">
 		<table id="navigation">
 			<th>
-				<td><button id="core-tab" type="button" onClick="switchTab('core');">Core</button></td>
-				<td><button id="defenses-tab" type="button" onClick="switchTab('defenses');">Defenses</button></td>
-				<td><button id="attacks-tab" type="button" onClick="switchTab('attacks');">Attacks</button></td>
-				<td><button id="skills-tab" type="button" onClick="switchTab('skills');">Skills</button></td>
+				<td><button id="core-tab" class="tab-button" type="button" onClick="switchTab('core');">Core</button></td>
+				<td><button id="defenses-tab" class="tab-button" type="button" onClick="switchTab('defenses');">Defenses</button></td>
+				<td><button id="attacks-tab" class="tab-button" type="button" onClick="switchTab('attacks');">Attacks</button></td>
+				<td><button id="skills-tab" class="tab-button" type="button" onClick="switchTab('skills');">Skills</button></td>
 			</th>
 		</table>
 		<form>
 	
 		<div class="tab-body" id="core-body">
+			<h1>Core</h1>
 		<table id="character-details">
 			<th colspan="4"><h1>Character Details</h1></th>
 			<tr>
@@ -260,6 +261,7 @@
 		</div>
 		
 		<div class="tab-body" id="defenses-body">
+			<h1>Defenses</h1>
 				
 		<table id="armor-class">
 			<th colspan="10"><h1>Armor Class</h1></th>
@@ -455,12 +457,14 @@
 		<div class="tab-body" id="attacks-body">
 		
 		<table id="attacks">
+			<h1>Attacks</h1>
 			<!-- TODO: Attacks table -->
 			
 		</table>
 		
 		</div>
 		<div class="tab-body" id="skills-body">
+			<h1>Skills</h1>
 		
 		<table id="skills">
 			<th colspan="10"><h1>Skills</h1></th>
