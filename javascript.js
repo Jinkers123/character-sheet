@@ -158,7 +158,7 @@ function rollFor(stat) {
 
 function rollDice(dice, sides) {
 	var results = [];
-	for (var i = 0; i < dice, i++) {
+	for (var i = 0; i < dice; i++) {
   		results[i] = rollSingleDice(1, sides);
 	}
 	return results;
