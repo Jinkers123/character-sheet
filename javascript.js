@@ -218,11 +218,11 @@ function download() {
 	var contentType = "text/plain";
 	
 	//DEBUG alert(content);
-	downloadFile(content, fileNme, contentType);
+	downloadFile(content, fileName, contentType);
 	
 }
 
-function downloadFile(data, filename, type="text/plain") {
+function downloadFile(data, fileName, type="text/plain") {
 	// Create an invisible A element
 	const a = document.createElement("a");
 	a.style.display = "none";
