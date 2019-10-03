@@ -27,21 +27,17 @@
 	
 <!-- Character sheet starts here -->
 	<div class="flex-container">
+		<table id="navigation">
+			<th>
+				<td><button id="core-tab" type="button" onClick="changeTab('core');">Core</button></td>
+				<td><button id="core-tab" type="button" onClick="changeTab('defenses');">Defenses</button></td>
+				<td><button id="core-tab" type="button" onClick="changeTab('attacks');">Attacks</button></td>
+				<td><button id="core-tab" type="button" onClick="changeTab('skills');">Skills</button></td>
+			</th>
+		</table>
 		<form>
-	<!-- Table containing basic character details:
-		Name
-		Player Name
-		Experience
-		Ancestry and Heritage
-		Background
-		Class
-		Size
-		Alignment
-		Traits
-		Level
-		Hero Points
-		Deity
-	-->
+	
+		<div class="tab-body" id="core-body">
 		<table id="character-details">
 			<th colspan="4"><h1>Character Details</h1></th>
 			<tr>
@@ -207,7 +203,64 @@
 				</td>
 			</tr>
 		</table>
+			
+		<table id="perception" class="skill">
+			<th colspan="10"><h1><button type="button" id="perception-button" onClick="rollFor('perception');">Perception</button></h1></th>
+			<tr>
+				<td class="strong">Total</td>
+				<td class="hidden">Base</td>
+				<td>Ability</td>
+				<td>Ability Mod</td>
+				<td>Prof</td>
+				<td class="edit">Prof Value</td>
+				<td>Item</td>
+				<td class="hidden">Armor Penalty</td>
+			</tr>
+			<tr>
+				<td><input type="number" name="perception-total" id="perception-total" value="0" size="2" disabled></td>
+				<td class="hidden"><input type="number" name="perception-base" id="perception-base" value="0" size="2" disabled></td>
+				<td>
+					<select name="perception-ability" id="perception-ability" onchange="updateSection('perception');">
+						<option value="str">Strength</option>
+						<option value="dex">Dexterity</option>
+						<option value="con">Constitution</option>
+						<option value="int">Intelligence</option>
+						<option value="wis" selected="selected">Wisdom</option>
+						<option value="cha">Charisma</option>
+					</select>
+				</td>
+				<td><input type="number" name="perception-ability-mod" id="perception-ability-mod" value="0" size="2" disabled></td>
+				<td>
+					<select name="perception-prof" id="perception-prof" onchange="updateSection('perception');">
+						<option value="0" selected="selected">Untrained</option>
+						<option value="2">Trained</option>
+						<option value="4">Expert</option>
+						<option value="6">Master</option>
+						<option value="8">Legendary</option>
+					</select>
+				</td>
+				<td class="edit"><input type="number" name="perception-prof-value" id="perception-prof-value" value="0" size="2" disabled></td>
+				<td><input type="number" name="perception-item" id="perception-item" min="0" step="1" value="0" size="2" onchange="updateSection('perception');"></td>
+				<td class="hidden"><input type="number" name="perception-armor-penalty" id="perception-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
+			</tr>
+		</table>
 		
+		<table id="speed">
+			<th colspan="5"><h1>Speed</h1></th>
+			<tr>
+				<td class="strong">Base</td>
+				<td class="strong">Notes</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="speed-base" id="speed-base" value=""></td>
+				<td><input type="text" name="speed-notes" id="speed-notes" value=""></td>
+			</tr>
+		</table>
+			
+		</div>
+		
+		<div class="tab-body" id="defenses-body">
+				
 		<table id="armor-class">
 			<th colspan="10"><h1>Armor Class</h1></th>
 			<tr>
@@ -396,64 +449,18 @@
 				</td>
 			</tr>
 		</table>
-			
-		<table id="perception" class="skill">
-			<th colspan="10"><h1><button type="button" id="perception-button" onClick="rollFor('perception');">Perception</button></h1></th>
-			<tr>
-				<td class="strong">Total</td>
-				<td class="hidden">Base</td>
-				<td>Ability</td>
-				<td>Ability Mod</td>
-				<td>Prof</td>
-				<td class="edit">Prof Value</td>
-				<td>Item</td>
-				<td class="hidden">Armor Penalty</td>
-			</tr>
-			<tr>
-				<td><input type="number" name="perception-total" id="perception-total" value="0" size="2" disabled></td>
-				<td class="hidden"><input type="number" name="perception-base" id="perception-base" value="0" size="2" disabled></td>
-				<td>
-					<select name="perception-ability" id="perception-ability" onchange="updateSection('perception');">
-						<option value="str">Strength</option>
-						<option value="dex">Dexterity</option>
-						<option value="con">Constitution</option>
-						<option value="int">Intelligence</option>
-						<option value="wis" selected="selected">Wisdom</option>
-						<option value="cha">Charisma</option>
-					</select>
-				</td>
-				<td><input type="number" name="perception-ability-mod" id="perception-ability-mod" value="0" size="2" disabled></td>
-				<td>
-					<select name="perception-prof" id="perception-prof" onchange="updateSection('perception');">
-						<option value="0" selected="selected">Untrained</option>
-						<option value="2">Trained</option>
-						<option value="4">Expert</option>
-						<option value="6">Master</option>
-						<option value="8">Legendary</option>
-					</select>
-				</td>
-				<td class="edit"><input type="number" name="perception-prof-value" id="perception-prof-value" value="0" size="2" disabled></td>
-				<td><input type="number" name="perception-item" id="perception-item" min="0" step="1" value="0" size="2" onchange="updateSection('perception');"></td>
-				<td class="hidden"><input type="number" name="perception-armor-penalty" id="perception-armor-penalty" max="0" step="1" value="0" size="2" disabled></td>
-			</tr>
-		</table>
 		
-		<table id="speed">
-			<th colspan="5"><h1>Speed</h1></th>
-			<tr>
-				<td class="strong">Base</td>
-				<td class="strong">Notes</td>
-			</tr>
-			<tr>
-				<td><input type="text" name="speed-base" id="speed-base" value=""></td>
-				<td><input type="text" name="speed-notes" id="speed-notes" value=""></td>
-			</tr>
-		</table>
+		</div>
+		
+		<div class="tab-body" id="attacks-body">
 		
 		<table id="attacks">
 			<!-- TODO: Attacks table -->
 			
 		</table>
+		
+		</div>
+		<div class="tab-body" id="skills-body">
 		
 		<table id="skills">
 			<th colspan="10"><h1>Skills</h1></th>
@@ -972,6 +979,7 @@
 				<td><input type="number" name="thievery-armor-penalty" id="thievery-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateSection('thievery');"></td>
 			</tr>
 		</table>
+		</div>
 		
 		<button type="button" onClick="download();">Download</button>
 
