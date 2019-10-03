@@ -195,7 +195,7 @@ function switchTab(tabID) {
 	for (var i = 0; i < tabButtons.length; i++) {
 		tabButtons[i].disabled = "false";
 	}
-	document.getElementByID(tabID + "-tab").disabled = "true";
+	document.getElementById(tabID + "-tab").disabled = "true";
 }
 
 function download() {
