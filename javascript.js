@@ -187,7 +187,7 @@ function toggleVisibility(className) {
 function switchTab(tabID) {
 	tabs = document.getElementsByClassName("tab-body");
 	for (var i = 0; i < tabs.length; i++) {
-		tabs[i].style.display = tabs[i].style.display == "none";
+		tabs[i].style.display = "none";
 	}
 	document.getElementById(tabID + "-body").display = "inline";
 	
