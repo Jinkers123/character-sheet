@@ -1,10 +1,14 @@
-window.onload = function addTooltips() {
+window.onload = function initialisePage() {
+	
 	var inputs = document.getElementsByTagName("input")
 	
 	inLen = inputs.length;
 	for (i = 0; i < inLen; i++) {
 		inputs[i].title = inputs[i].id;
 	}
+	
+	switchTab("core");
+	updateLevel();
 }
 
 //Function to update ability scores whenever an ability is updated
