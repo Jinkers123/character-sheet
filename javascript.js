@@ -2,8 +2,7 @@ window.onload = function initialisePage() {
 	
 	//Add tooltip to each field equal to it's ID
 	var inputs = document.getElementsByTagName("input")
-	inLen = inputs.length;
-	for (i = 0; i < inLen; i++) {
+	for (i = 0; i < inputs.length; i++) {
 		inputs[i].title = inputs[i].id;
 	}
 	
@@ -125,6 +124,7 @@ function updateSkills(ability) {
 		var i;
 		
 		for (i = 0; i < skills.length; ++i) {
+			var skill = skills[i].id;
 			updateSection(skill);
 		}
 	} else {
@@ -190,8 +190,7 @@ function toggleVisibility(className) {
 
 function switchTab(tabID) {
 	tabs = document.getElementsByClassName("tab-body");
-	var tabCount = tabs.length;
-	for (var i = 0; i < tabCount; i++) {
+	for (var i = 0; i < tabs.length; i++) {
 		if (tabs[i].id == (tabID + "-body")) {
 			tabs[i].style.display = "block";
 		} else {
@@ -201,8 +200,7 @@ function switchTab(tabID) {
 	document.getElementById(tabID + "-body").display = "block";
 	
 	tabButtons = document.getElementsByClassName("tab-name");
-	var buttonCount = tabButtons.length;
-	for (var i = 0; i < buttonCount; i++) {
+	for (var i = 0; i < tabButtons.length; i++) {
 		if (tabButtons[i].id == (tabID + "-tab")) {
 			tabButtons[i].disabled = "true";
 		} else {
