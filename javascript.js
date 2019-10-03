@@ -1,3 +1,11 @@
+window.onload = function addTooltips() {
+	var inputs = document.getElementsByTagName("input")
+	
+	inputs.forEach(item) {
+		item.title = item.id;
+	}
+}
+
 //Function to update ability scores whenever an ability is updated
 function updateAbilities(ability) {
 	//	Get current values and calculate the ability modifier (mod)
