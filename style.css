@@ -64,12 +64,6 @@ td {
 	border: 1px solid grey;
 }
 
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
