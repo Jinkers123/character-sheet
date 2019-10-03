@@ -109,7 +109,7 @@ function updateSkills(ability) {
 	if (ability == "all") {
 		//Get list of skills and loop through them
 		var skills = document.querySelectorAll(".skill");
-		var	i;
+		var i;
 		
 		for (i = 0; i < skills.length; ++i) {
 			updateSection(skill);
@@ -117,10 +117,9 @@ function updateSkills(ability) {
 	} else {
 		//Get list of skills and loop through them
 		var skills = document.querySelectorAll(".skill");
-		var	i;
+		var i;
 		
 		for (i = 0; i < skills.length; ++i) {
-		
 			//Update skills that use the modified ability
 			var skill = skills[i].id;
 			var skillAbility = document.getElementById(skill + "-ability").value;
@@ -147,23 +146,47 @@ function rollFor(stat) {
 		var statTotal = parseInt(document.getElementById(stat + "-total").value);
 	}
 	
-	var diceResult = rollDice(1,20);
+	var diceResult = rollDice(1,20)[0];
 	var result = diceResult + statTotal;
-	alert("Rolled " + statName + ": " + result + " (" + diceResult + " + " + statTotal + ")");
+	var rollDescription = "Rolled: 1d20 (" + diceResult + ") + total " + stat + " modifier (" + statTotal + ") = " + result + ".";
+	//DEBUG alert("Rolled " + statName + ": " + result + " (" + diceResult + " + " + statTotal + ")");
 	
 	document.getElementById("roll-name").value = statName;
 	document.getElementById("roll-result").value = result;
+	document.getElementById("roll-description").value = rollDescription;
 }
 
-function rollDice(min, max) { // min and max included 
+function rollDice(dice, sides) {
+	var results = [];
+	for (var i = 0; i < dice, i++) {
+  		results[i] = rollSingleDice(1, sides);
+	}
+	return results;
+}
+
+function rollSingleDice(min, max) { // min and max included 
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function toggleVisibility(className) {
-    elements = document.getElementsByClassName(className);
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].style.display = elements[i].style.display == 'none' ? 'table-cell' : 'none';
-    }
+	elements = document.getElementsByClassName(className);
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].style.display = elements[i].style.display == "none" ? "table-cell" : "none";
+	}
+}
+
+function switchTab(tabID) {
+	tabs = document.getElementsByClassName("tab-body");
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].style.display = tabs[i].style.display == "none";
+	}
+	document.getElementById(tabID + "-body").display = "inline";
+	
+	tabButtons = document.getElementsByClassName("tab-name");
+	for (var i = 0; i < tabButtons.length; i++) {
+		tabButtons[i].disabled = "false";
+	}
+	document.getElementByID(tabID + "-tab").disabled = "true";
 }
 
 function download() {
