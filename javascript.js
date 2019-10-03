@@ -1,8 +1,9 @@
 window.onload = function addTooltips() {
 	var inputs = document.getElementsByTagName("input")
 	
-	inputs.forEach(item) {
-		item.title = item.id;
+	inLen = inputs.length;
+	for (i = 0; i < inLen; i++) {
+		inputs[i].title = inputs[i].id;
 	}
 }
 
