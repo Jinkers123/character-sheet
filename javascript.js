@@ -1,14 +1,14 @@
 window.onload = function initialisePage() {
 	
+	//Add tooltip to each field equal to it's ID
 	var inputs = document.getElementsByTagName("input")
-	
 	inLen = inputs.length;
 	for (i = 0; i < inLen; i++) {
 		inputs[i].title = inputs[i].id;
 	}
 	
-	switchTab("core");
 	updateLevel();
+	switchTab("core");
 }
 
 //Function to update ability scores whenever an ability is updated
@@ -190,16 +190,25 @@ function toggleVisibility(className) {
 
 function switchTab(tabID) {
 	tabs = document.getElementsByClassName("tab-body");
-	for (var i = 0; i < tabs.length; i++) {
-		tabs[i].style.display = "none";
+	var tabCount = tabs.length;
+	for (var i = 0; i < tabCount; i++) {
+		if (tabs[i].id == (tabID + "-body")) {
+			tabs[i].style.display = "block";
+		} else {
+			tabs[i].style.display = "none";
+		}
 	}
-	document.getElementById(tabID + "-body").display = "inline";
+	document.getElementById(tabID + "-body").display = "block";
 	
 	tabButtons = document.getElementsByClassName("tab-name");
-	for (var i = 0; i < tabButtons.length; i++) {
-		tabButtons[i].disabled = "false";
+	var buttonCount = tabButtons.length;
+	for (var i = 0; i < buttonCount; i++) {
+		if (tabButtons[i].id == (tabID + "-tab")) {
+			tabButtons[i].disabled = "true";
+		} else {
+			tabButtons[i].disabled = "false";
+		}
 	}
-	document.getElementById(tabID + "-tab").disabled = "true";
 }
 
 function download() {
