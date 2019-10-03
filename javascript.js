@@ -153,7 +153,7 @@ function rollFor(stat) {
 	
 	document.getElementById("roll-name").value = statName;
 	document.getElementById("roll-result").value = result;
-	document.getElementById("roll-description").value = rollDescription;
+	document.getElementById("roll-description").textContent = rollDescription;
 }
 
 function rollDice(dice, sides) {
