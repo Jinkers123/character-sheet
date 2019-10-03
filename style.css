@@ -66,13 +66,13 @@ td {
 
 /* Tooltip text */
 .tooltip .tooltiptext {
+  display: none;
   visibility: hidden;
   width: 120px;
-  top: -5px;
-  left: 105%;
   background-color: black;
   color: #fff;
   text-align: center;
+  text-decoration: none;
   padding: 5px 0;
   border-radius: 6px;
 }
@@ -90,7 +90,9 @@ td {
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
+  display: block;
   visibility: visible;
+  position: absolute;
 }
 
 #character-level, #character-exp, #character-exp-max  {
