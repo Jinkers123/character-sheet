@@ -202,7 +202,7 @@ function switchTab(tabID) {
 	}
 	document.getElementById(tabID + "-body").display = "block";
 	
-	tabButtons = document.getElementsByClassName("tab-name");
+	tabButtons = document.getElementsByClassName("tab-button");
 	for (var i = 0; i < tabButtons.length; i++) {
 		if (tabButtons[i].id == (tabID + "-tab")) {
 			tabButtons[i].disabled = "true";
