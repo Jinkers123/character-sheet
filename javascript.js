@@ -205,7 +205,7 @@ function switchTab(tabID) {
 
 //Function to save a file on the user's local file system
 function download() {
-	var content = JSON.stringify($("character-form").serializeArray());
+	var content = JSON.stringify($("form[id='character-sheet']").serializeArray());
 	var fileName = "json.txt";
 	var contentType = "text/plain";
 	
@@ -238,6 +238,26 @@ function downloadFile(data, fileName, type="text/plain") {
 //Function to load a previously saved file
 function upload() {
 	var file = document.getElementById("save-file").files[0];
-	var saveData = JSON.parse(file);
-	alert(saveData);
+
+
+	if (!file) {
+		alert("Please choose a file.");
+		return;
+	}
+
+	var reader = new FileReader();
+	reader.onload = function(e) {
+		var saveData = JSON.parse(e.target.result);
+		
+		//Loop through all defined character fields and fill in character sheet
+		var n = saveData.length;
+		for (var i = 0; i < n; i++) {
+			console.log(saveData[i].name + " = " + saveData[i].value);
+			document.getElementById(saveData[i].name).value = saveData[i].value
+		}
+		document.getElementById("upload-form").reset();
+		alert("Load complete!");
+	};
+
+	reader.readAsText(file);
 }
