@@ -518,8 +518,8 @@
 					</td>
 				</tr>
 			</table>
-			<table id="melee-strikes">
-				<th colspan="10">Melee Strikes</th>
+			<h2>Melee Strikes</h2>
+			<table id="attack-melee1">
 				<tr>
 					<td><input type="text" name="attack-melee1-name" id="attack-melee1-name" value="" size="15"></td>
 					<td class="strong">Total</td>
@@ -533,27 +533,48 @@
 							<option value="cha">Charisma</option>
 						</select>
 					</td>
-					<td>Proficiency</td>
+					<td>Type</td>
 					<td>Prof Bonus</td>
 					<td>Item</td>
 				</tr>
-				<tr id="attack-melee1" class="attack">
-					<td class="strong"><button type="button" id="attack-melee1-button" onClick="rollFor('attack-melee1');">Attack</button></td>
+				<tr>
+					<td rowspan="3"><button type="button" id="attack-melee1-button" onClick="rollAttack('melee1');">Attack</button></td>
 					<td><input type="number" name="attack-melee1-total" id="attack-melee1-total" value="0" size="2" disabled></td>
-					<td class="hidden"><input type="number" name="attack-melee1-base" id="attack-melee1-base" value="0" size="2" disabled></td>
 					<td><input type="number" name="attack-melee1-ability-mod" id="attack-melee1-ability-mod" value="0" size="2" disabled></td>
 					<td>
-						<select name="attack-melee1-prof" id="attack-melee1-prof" onchange="updateAttacks('melee', 'melee1');">
-							<option value="0" selected="selected">Untrained</option>
-							<option value="2">Trained</option>
-							<option value="4">Expert</option>
-							<option value="6">Master</option>
-							<option value="8">Legendary</option>
+						<select name="attack-melee1-type" id="attack-melee1-type" onchange="updateAttacks('melee', 'melee1');">
+							<option value="unarmed" selected="selected">Unarmed</option>
+							<option value="simple">Simple</option>
+							<option value="martial">Martial</option>
+							<option value="other1">Other 1</option>
+							<option value="other2">Other 2</option>
 						</select>
 					</td>
 					<td><input type="number" name="attack-melee1-prof-value" id="attack-melee1-prof-value" value="0" size="2" disabled></td>
 					<td><input type="number" name="attack-melee1-item" id="attack-melee1-item" min="0" step="1" value="0" size="2" onchange="updateAttacks('melee', 'melee1');"></td>
-					<td class="hidden"><input type="number" name="attack-melee1-armor-penalty" id="attack-melee1-armor-penalty" max="0" step="1" value="0" size="2" onchange="updateAttacks('melee', 'melee1');"></td>
+				</tr>
+				<tr>
+					<td>Dice</td>
+					<td>
+						<select name="damage-melee1-ability" id="damage-melee1-ability" onchange="updateAttacks('melee', 'melee1');">
+							<option value="str" selected="selected">Strength</option>
+							<option value="dex">Dexterity</option>
+							<option value="con">Constitution</option>
+							<option value="int">Intelligence</option>
+							<option value="wis">Wisdom</option>
+							<option value="cha">Charisma</option>
+						</select>
+					</td>
+					<td>Other</td>
+					<td>Item</td>
+					<td>Traits</td>
+				</tr>
+				<tr>
+					<td><input type="number" name="damage-melee1-dice-count" id="damage-melee1-dice-count" value="0" size="2">d<input type="number" name="damage-melee1-dice-size" id="damage-melee1-dice-size" value="0" size="2"></td>
+					<td><input type="number" name="damage-melee1-ability-mod" id="damage-melee1-ability-mod" value="0" size="2" disabled></td>
+					<td><input type="number" name="damage-melee1-other" id="damage-melee1-other" value="0" size="2" onchange="updateAttacks('melee', 'melee1');"></td>
+					<td><input type="number" name="damage-melee1-item" id="attack-melee1-item" min="0" step="1" value="0" size="2" onchange="updateAttacks('melee', 'melee1');"></td>
+					<td><input type="text" name="damage-melee1-traits" id="damage-melee1-traits" value="" size="20"></td>
 				</tr>
 			</table>
 		
