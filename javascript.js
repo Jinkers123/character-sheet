@@ -88,7 +88,7 @@ function updateAC() {
 function updateAttacks(scope, id="all") {
 	if (scope == "all") {
 		alert("Updating all");
-		var strikes = document.getElementsByClass("strike");
+		var strikes = document.getElementsByClassName("strike");
 		
 		for (var i = 0; i < strikes.length; i++) {
 			var strikeId = strikes[i].id
@@ -96,7 +96,7 @@ function updateAttacks(scope, id="all") {
 		}
 	} else if (scope == "type") {
 		alert("Updating type: " + id);
-		var strikes = document.getElementsByClass("strike");
+		var strikes = document.getElementsByClassName("strike");
 		
 		for (var i = 0; i < strikes.length; i++) {
 			var strikeId = strikes[i].id
@@ -121,7 +121,7 @@ function updateStrike(id) {
 	//Get proficiency for attack type
 	var attProf = 0
 	var attType = document.getElementById(attack + "-type").value;
-	var typeProf = document.getElementById("attack-" + attType + "-prof").value;
+	var typeProf = parseInt(document.getElementById("attack-" + attType + "-prof").value);
 	
 	//Calculate proficiency bonus based on Proficiency bonus + level (or leave as zero if untrained)
 	if (typeProf > 0) {
