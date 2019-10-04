@@ -201,25 +201,16 @@ function switchTab(tabID) {
 		}
 	}
 	document.getElementById(tabID + "-body").display = "block";
-	
-	tabButtons = document.getElementsByClassName("tab-button");
-	for (var i = 0; i < tabButtons.length; i++) {
-		if (tabButtons[i].id == (tabID + "-tab")) {
-			tabButtons[i].disabled = "true";
-		} else {
-			tabButtons[i].disabled = "false";
-		}
-	}
 }
 
+//Function to save a file on the user's local file system
 function download() {
-	var content = JSON.stringify($("form").serializeArray());
+	var content = JSON.stringify($("character-form").serializeArray());
 	var fileName = "json.txt";
 	var contentType = "text/plain";
 	
 	//DEBUG alert(content);
 	downloadFile(content, fileName, contentType);
-	
 }
 
 function downloadFile(data, fileName, type="text/plain") {
@@ -242,4 +233,11 @@ function downloadFile(data, fileName, type="text/plain") {
 	// Cleanup
 	window.URL.revokeObjectURL(a.href);
 	document.body.removeChild(a);
+}
+
+//Function to load a previously saved file
+function upload() {
+	var file = document.getElementById("save-file").files[0];
+	var saveData = JSON.parse(file);
+	alert(saveData);
 }
