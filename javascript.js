@@ -34,6 +34,13 @@ function updateAbilities(ability) {
 }
 
 function updateLevel() {
+	//Ensure all ability scores are up to date
+	var abilities = ["str","dex","con","int","wis","cha"];
+	for (var i = 0; i < abilities.length; i++) {
+		updateAbilities(abilities[i]);
+	}
+	
+	//Update other stats
 	updateAC();
 	updateHP();
 	updateSkills("all");
@@ -256,6 +263,7 @@ function upload() {
 			document.getElementById(saveData[i].name).value = saveData[i].value
 		}
 		document.getElementById("upload-form").reset();
+		updateLevel();
 		alert("Load complete!");
 	};
 
