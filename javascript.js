@@ -85,6 +85,34 @@ function updateAC() {
 	document.getElementById("ac-total").value = acTotal;
 }
 
+function updateAttacks(scope, id) {
+	var attack = "attack-" + id;
+	//Update attack row
+	var attAbility = document.getElementById(attack + "-ability").value;
+	document.getElementById(attack + "-ability-mod").value = parseInt(document.getElementById(attAbility + "-mod").value);
+	
+	var attAbilityMod = parseInt(document.getElementById(attack + "-ability-mod").value);
+	
+	//Get proficiency for attack type
+	var attProf = 0
+	var attType = document.getElementById(attack + "-type").value;
+	var typeProf = document.getElementById("attack-" + attType + "-prof").value;
+	
+	//Calculate proficiency bonus based on Proficiency bonus + level (or leave as zero if untrained)
+	if (typeProf > 0) {
+		attProf = typeProf + parseInt(document.getElementById("character-level").value);
+	}
+	
+	document.getElementById(attack + "-prof-value").value = attProf;
+	
+	var attItem = parseInt(document.getElementById(attack + "-item").value);
+
+	//Calculate final total
+	var attTotal = (attAbilityMod + attProf + attItem);
+	
+	document.getElementById(attack + "-total").value = attTotal;
+}
+
 function updateSection(section) {
 	
 	var dcBase = parseInt(document.getElementById(section + "-base").value);
