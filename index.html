@@ -35,7 +35,7 @@
 				<td><button id="skills-tab" class="tab-button" type="button" onClick="switchTab('skills');">Skills</button></td>
 			</th>
 		</table>
-		<form>
+		<form id="character-form">
 	
 		<div class="tab-body" id="core-body">
 			<h1>Core</h1>
@@ -987,6 +987,10 @@
 		
 		<button type="button" onClick="download();">Download</button>
 
+	</form>
+	<form id="upload-form">
+		<input type="file" id="save-file" name="save-file" accept="text/plain">
+		<button type="button" onClick="upload();">Load Save</button>
 	</form>
 	</div>
 </body>
