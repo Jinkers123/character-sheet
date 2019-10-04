@@ -31,6 +31,7 @@ function updateAbilities(ability) {
 	}
 	
 	updateSkills(ability);
+	updateAttacks("all");
 }
 
 function updateLevel() {
@@ -44,6 +45,7 @@ function updateLevel() {
 	updateAC();
 	updateHP();
 	updateSkills("all");
+	updateAttacks("all");
 }
 
 function updateAC() {
@@ -87,7 +89,6 @@ function updateAC() {
 
 function updateAttacks(scope, id="all") {
 	if (scope == "all") {
-		alert("Updating all");
 		var strikes = document.getElementsByClassName("strike");
 		
 		for (var i = 0; i < strikes.length; i++) {
@@ -95,7 +96,6 @@ function updateAttacks(scope, id="all") {
 			updateStrike(strikeId.split("-")[1]);
 		}
 	} else if (scope == "type") {
-		alert("Updating type: " + id);
 		var strikes = document.getElementsByClassName("strike");
 		
 		for (var i = 0; i < strikes.length; i++) {
@@ -105,7 +105,6 @@ function updateAttacks(scope, id="all") {
 			}
 		}
 	} else {
-		alert("Updating strike: " + id);
 		updateStrike(id);
 	}
 }
