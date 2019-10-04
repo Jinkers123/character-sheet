@@ -85,7 +85,32 @@ function updateAC() {
 	document.getElementById("ac-total").value = acTotal;
 }
 
-function updateAttacks(scope, id) {
+function updateAttacks(scope, id="all") {
+	if (scope == "all") {
+		alert("Updating all");
+		var strikes = document.getElementsByClass("strike");
+		
+		for (var i = 0; i < strikes.length; i++) {
+			var strikeId = strikes[i].id
+			updateStrike(strikeId.split("-")[1]);
+		}
+	} else if (scope == "type") {
+		alert("Updating type: " + id);
+		var strikes = document.getElementsByClass("strike");
+		
+		for (var i = 0; i < strikes.length; i++) {
+			var strikeId = strikes[i].id
+			if (document.getElementById(strikeId + "-type").value = id) {
+				updateStrike(strikeId.split("-")[1]);
+			}
+		}
+	} else {
+		alert("Updating strike: " + id);
+		updateStrike(id);
+	}
+}
+
+function updateStrike(id) {
 	var attack = "attack-" + id;
 	//Update attack row
 	var attAbility = document.getElementById(attack + "-ability").value;
@@ -111,6 +136,23 @@ function updateAttacks(scope, id) {
 	var attTotal = (attAbilityMod + attProf + attItem);
 	
 	document.getElementById(attack + "-total").value = attTotal;
+	
+	//Update damage ability
+	var damage = "damage-" + id;
+	var dmgAbility = document.getElementById(damage + "-ability").value;
+	document.getElementById(damage + "-ability-mod").value = parseInt(document.getElementById(dmgAbility + "-mod").value);	
+}
+
+function updateHP() {
+	//Get modifier for selected HP ability score
+	var hpMod = parseInt(document.getElementById(document.getElementById("hp-ability").value + "-mod").value)
+	
+	//Calculate HP maximum based on class HP and HP mod times level, plus ancestry HP
+	var hpTotal = parseInt(document.getElementById("hp-ancestry").value)
+		+ ((parseInt(document.getElementById("hp-increment").value) + hpMod)
+		* parseInt(document.getElementById("character-level").value));
+		
+	document.getElementById("hp-max").value = hpTotal;
 }
 
 function updateSection(section) {
@@ -141,18 +183,6 @@ function updateSection(section) {
 	var dcTotal = (dcBase + dcAbilityMod + dcProf + dcItem + dcArmorPenalty);
 	
 	document.getElementById(section + "-total").value = dcTotal;
-}
-
-function updateHP() {
-	//Get modifier for selected HP ability score
-	var hpMod = parseInt(document.getElementById(document.getElementById("hp-ability").value + "-mod").value)
-	
-	//Calculate HP maximum based on class HP and HP mod times level, plus ancestry HP
-	var hpTotal = parseInt(document.getElementById("hp-ancestry").value)
-		+ ((parseInt(document.getElementById("hp-increment").value) + hpMod)
-		* parseInt(document.getElementById("character-level").value));
-		
-	document.getElementById("hp-max").value = hpTotal;
 }
 
 function updateSkills(ability) {
